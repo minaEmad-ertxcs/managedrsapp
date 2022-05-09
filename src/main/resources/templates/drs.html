@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Drs</title>
+    <link rel="shourtcut icon" th:type="image" th:href="@{/image/logo.png}">
+    <link rel="stylesheet" href="" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div th:replace="~{/fragments/navbar :: navigationBar}"></div>
+<div class="container-fluid">
+    <div class="h1 text-center m-3">Drs</div>
+    <div class="h2 text-center m-3">
+
+        <a class="nav-link" href="/drs/new">Sign up</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center rounded">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Phone</th>
+                <th>Enabled</th>
+                <th>Edit Or Delete</th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+
+                <tr  th:each="dr : ${listDrs}">
+                <td th:text="${dr.getId()}"></td>
+                <td th:text="${dr.getDrName()}"></td>
+                <td th:text="${dr.getDrAge()}"></td>
+                <td th:text="${dr.getDrPhone()}"></td>
+                <td th:text="${dr.isEnabled()}"></td>
+                <td class="text-center h5">
+                    <a class="m-1" th:href="@{'/drs/edit/' + ${dr.id}}">Edit</a>
+                    <a class="m-1" th:href="@{'/drs/delete/' + ${dr.id}}">Delete</a>
+                </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<br><br><br>
+<div th:replace="~{/fragments/footer :: footerBar}"></div>
+</body>
+</html>

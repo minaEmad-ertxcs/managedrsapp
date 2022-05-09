@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${PageTitle}]]</title>
+    <link rel="shourtcut icon" th:href="@{/image/logo.png}" th:type="image">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+
+</head>
+<body>
+<div th:replace="~{/fragments/navbar :: navigationBar}"></div>
+
+<h2 class="m-3 text-center">[[${PageTitle}]]</h2>
+<form method="post" th:action="@{/drs/save}" th:object="${dr}">
+    <input type="hidden" th:field="*{id}">
+    <div class="container-fluid border border-secondary p-4" style="border-radius: 20px; width: 500px;">
+        <div class="form_group row m-2">
+            <label class="col col-sm-6 col-form-label">Name:</label>
+            <div class="col col-sm-6">
+                <input class="form-control" maxlength="60" minlength="3" placeholder="Username" required
+                       th:field="*{drName}" type="text">
+            </div>
+
+        </div>
+        <div class="form_group row m-2">
+            <label class="col col-sm-6 col-form-label">Age:</label>
+            <div class="col col-sm-6">
+                <input class="form-control" max="60" min="15" placeholder="Age" required th:field="*{drAge}"
+                       type="number">
+            </div>
+        </div>
+        <div class="form_group row m-2">
+            <label class="col col-sm-6 col-form-label">Phone:</label>
+            <div class="col col-sm-6 ">
+                <input class="form-control" maxlength="15" placeholder="Phone" required
+                       th:field="*{drPhone}" type="text">
+            </div>
+        </div>
+        <div class="form_group row m-2 text-left">
+            <label class="col col-sm-6 col-form-label">Enable:</label>
+            <div class="col col-sm-6 ">
+                <input th:field="*{enabled}" type="checkbox">
+            </div>
+        </div>
+        <div class="form_group mt-4 text-center">
+            <button class="btn btn-outline-secondary" onclick="cancelForm()" type="button">Cancel</button>
+            <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </div>
+    </div>
+    <script>
+        function cancelForm() {
+            window.location = "/drs";
+        }
+    </script>
+</form>
+<div th:replace="~{/fragments/footer :: footerBar}"></div>
+</body>
+</html>
